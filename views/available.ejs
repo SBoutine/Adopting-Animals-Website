@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Available Pets</title>
+    <link rel = "stylesheet" href = "petShop.css"/>  
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+
+</head>
+<body>
+     <!--Grid layout--> 
+     <div class = "grid-container">
+
+        <!--Header-->
+        <%- include('partials/header') %>
+
+        <!--Side menu bar-->
+        <%- include('partials/navbar') %>
+
+       <!--Content area-->
+       <article>
+        <h2>Browse Available Pets</h2>
+        <br>
+        <div>
+            <!-- Pet 1 -->
+            <div>
+                <img src="dog1.jpg" alt="Buddy the Dog" width="250" class = "available">
+                <div>
+                    <h3>Buddy</h3>
+                    <p><strong>Type:</strong> Dog</p>
+                    <p><strong>Breed:</strong> Golden Retriever</p>
+                    <p><strong>Age:</strong> 2 years</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Description:</strong> Buddy is a friendly and energetic dog who loves to play fetch and go on long walks. He is great with kids and other pets.</p>
+                    <button class="interested">Interested</button>
+                </div>
+            </div>
+    <br><br>
+
+            <!-- Pet 2 -->
+            <div>
+                <img src="cat1.jpg" alt="Mittens the Cat" width="250" class = "available">
+                <div>
+                    <h3>Mittens</h3>
+                    <p><strong>Type:</strong> Cat</p>
+                    <p><strong>Breed:</strong> Siamese</p>
+                    <p><strong>Age:</strong> 3 years</p>
+                    <p><strong>Gender:</strong> Female</p>
+                    <p><strong>Description:</strong> Mittens is a calm and affectionate cat who enjoys lounging in the sun and cuddling with her humans.</p>
+                    <button class="interested">Interested</button>
+                </div>
+            </div>
+            <br><br>
+
+            <!-- Pet 3 -->
+            <div>
+                <img src="dog2.avif" alt="Max the Dog" width="300" class = "available">
+                <div>
+                    <h3>Max</h3>
+                    <p><strong>Type:</strong> Dog</p>
+                    <p><strong>Breed:</strong> German Shepherd</p>
+                    <p><strong>Age:</strong> 4 years</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Description:</strong> Max is a loyal and protective dog who is great for families. He is trained in basic commands and loves outdoor activities.</p>
+                    <button class="interested">Interested</button>
+                </div>
+            </div>
+            <br><br>
+
+            <!-- Pet 4 -->
+            <div>
+                <img src="cat2.webp" alt="Luna the Cat" width="250" class = "available">
+                <div>
+                    <h3>Luna</h3>
+                    <p><strong>Type:</strong> Cat</p>
+                    <p><strong>Breed:</strong> Maine Coon</p>
+                    <p><strong>Age:</strong> 1 year</p>
+                    <p><strong>Gender:</strong> Female</p>
+                    <p><strong>Description:</strong> Luna is a playful and curious kitten who loves exploring her surroundings and playing with toys.</p>
+                    <button class="interested">Interested</button>
+                </div>
+            </div>
+        </div>
+       </article>
+
+    <!--footer-->
+        <%- include('partials/footer') %>
+
+    </div> <!--grid layout end-->
+
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find a dog/cat</title>
+    <link rel = "stylesheet" href = "petShop.css"/>  
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!--Grid layout--> 
+    <div class = "grid-container">
+
+        <!--Header-->
+        <%- include('partials/header') %>
+
+        <!--Side menu bar-->
+        <%- include('partials/navbar') %>
+
+       <!--Content area-->
+       <article>
+            <h2> Find a dog/cat</h2><br>
+            
+            <!--Create a form-->
+            <form id="findPetForm" action="/find" method="POST" onsubmit="return validateForm()">
+                <fieldset class ="fieldset1">
+                    <legend class="legend1">Fill the following information</legend>
+                   
+                    <!--Radio button : cat or dog-->
+                    <p class = "p1">
+                        <label>What are you looking for:</label>
+                        <input type = "radio" id = "cat" name = "type" value = "cat">
+                        <label for = "cat">Cat</label>
+                        <input type = "radio" id = "dog" name = "type" value = "dog">
+                        <label for = "dog">Dog</label>
+                        <span id="animalError" class="error-message"></span>
+                    </p>
+                
+                    <!--Drop-down list for breed-->
+                    <p class = "p1">
+                        <label for = "breed">Breed of dog or cat you're looking for: </label>
+                        <select id = "breed" name = "breed">
+                            <option>Bengal</option>
+                            <option>Maine Coon</option>
+                            <option>Siamese</option>
+                            <option>Persian</option>
+                            <option>Sphynx</option>
+                            <option>Labrador Retriever</option>
+                            <option>German Shepherd </option>
+                            <option>Golden Retriever</option>
+                            <option>French Bulldog</option>
+                            <option>Husky</option>
+                            <option>Doesn't matter</option>
+                        </select>
+                        <span id="breedError" class="error-message"></span>
+                    </p>
+
+                     <!--Drop-down list for age-->
+                     <p class = "p1">
+                        <label for = "age">Desired Age of the Animal:</label>
+                        <select id = "age" name = "age">
+                            <option>Less than 1 month old</option>
+                            <option>Less than 2 months old</option>
+                            <option>Between 2 and 6 months old</option>
+                            <option>Between 6 months and 1 year old</option>
+                            <option>1 year old</option>
+                            <option>2 years old</option>
+                            <option>3 years old</option>
+                            <option>4 years old</option>
+                            <option>5 years old</option>
+                            <option>More than 5 years old</option>
+                        </select>
+                        <span id="ageError" class="error-message"></span>
+
+                    </p>
+
+                    <!--Radio button: Preferred gender -->
+                    <p class = "p1">
+                        <label>Preferred gender:</label>
+                        <input type = "radio" id = "female" name = "gender" value = "female">
+                        <label for = "female">Female</label>
+                        <input type = "radio" id = "male" name = "gender" value = "male">
+                        <label for = "male">Male</label>
+                        <input type = "radio" id = "both" name = "gender" value = "both">
+                        <label for = "both">Doesn't matter</label>
+                        <span id="genderError" class="error-message"></span>
+                    </p>
+
+                    <!--Check box for the needs-->
+                    <p class = "p1">
+                        <label>Gets along with:</label><br>
+                        <input type ="checkbox" id = "othercats" name = "othercats" value = "othercats">
+                        <label for = "otherCat">Other dogs</label>
+                        <input type ="checkbox" id = "otherdogs" name = "otherdogs" value = "otherdogs">
+                        <label for = "otherDog">Other cats</label>
+                        <input type ="checkbox" id = "smallchildren" name = "smallchildren" value = "smallchildren">
+                        <label for = "children">Other small children</label>
+                        <span id="getsAlongError" class="error-message"></span>
+                    </p>
+
+                    <!--Submit and clear button-->
+                    <input type = "submit" value = "Submit">
+                    <input type = "reset" value = "Clear">
+                </fieldset>
+            </form>
+
+            <% if (locals.pets && pets.length > 0) { %>
+                <div id="results">
+                    <h2>Matching Pets</h2>
+                    <% pets.forEach(function(pet) { %>
+                        <div class="pet-card">
+                            <h3><%= pet.type.charAt(0).toUpperCase() + pet.type.slice(1) %> - <%= pet.breed %></h3>
+                            <p>Age: <%= pet.age %> years</p>
+                            <p>Gender: <%= pet.gender %></p>
+                            <p>Compatibility:</p>
+                            <ul>
+                                <li>Other Dogs: <%= pet.getsAlongWithOtherDogs ? 'Yes' : 'No' %></li>
+                                <li>Other Cats: <%= pet.getsAlongWithCats ? 'Yes' : 'No' %></li>
+                                <li>Small Children: <%= pet.getsAlongWithChildren ? 'Yes' : 'No' %></li>
+                            </ul>
+                            <p>Description: <%= pet.description %></p>
+                            <p>Contact: <%= pet.ownerFirstName %> <%= pet.ownerLastName %> (<%= pet.ownerEmail %>)</p>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else if (locals.pets && pets.length === 0) { %>
+                <div id="no-results">
+                   <br> <p id="nopet">No pets found matching your search criteria.</p>
+                </div>
+            <% } %>
+
+
+            
+       </article>
+
+    <!--footer-->
+    <%- include('partials/footer') %>
+
+
+    </div><!--grid layout end-->
+
+     <!-- JavaScript for form validation -->
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById('animalError').textContent = '';
+            document.getElementById('breedError').textContent = '';
+            document.getElementById('genderError').textContent = '';
+            document.getElementById('getsAlongError').textContent = '';
+
+            // Validate animal selection
+            const animalSelected = document.querySelector('input[name="type"]:checked');
+            if (!animalSelected) {
+                document.getElementById('animalError').textContent = 'Please select an animal (cat or dog).';
+                isValid = false;
+            }
+
+            // Validate breed selection
+            const breedSelected = document.getElementById('breed').value;
+            if (!breedSelected) {
+                document.getElementById('breedError').textContent = 'Please select a breed.';
+                isValid = false;
+            }
+
+            // Validate gender selection
+            const genderSelected = document.querySelector('input[name="gender"]:checked');
+            if (!genderSelected) {
+                document.getElementById('genderError').textContent = 'Please select a preferred gender.';
+                isValid = false;
+            }
+
+            // Validate "gets along with" selection
+            const getsAlongSelected = document.querySelector('input[name="othercats"]:checked') ||
+                                    document.querySelector('input[name="otherdogs"]:checked') ||
+                                    document.querySelector('input[name="smallchildren"]:checked');
+            if (!getsAlongSelected) {
+                document.getElementById('getsAlongError').textContent = 'Please select at least one option for "Gets along with".';
+                isValid = false;
+            }
+
+            // If validation fails
+            if (!isValid) {
+                return false;
+            }
+
+            // If validation passes, allow form submission
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</body>
+</html>

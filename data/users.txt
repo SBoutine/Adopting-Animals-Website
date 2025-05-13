@@ -1,0 +1,7 @@
+user1:pass1
+user2:pass2
+user3:pass3
+sabouti:1234a
+redabouti:123456789a
+rbouti:1234a
+rdex:1234a

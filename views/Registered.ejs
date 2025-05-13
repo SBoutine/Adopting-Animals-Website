@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privacy/Disclaimer Statement</title>
+    <link rel = "stylesheet" href = "petShop.css"/>  
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+
+</head>
+<body>
+     <!--Grid layout--> 
+     <div class = "grid-container">
+
+        <!--Header-->
+        <%- include('partials/header') %>
+
+        <!--Side menu bar-->
+        <%- include('partials/navbar') %>
+
+       <!--Content area-->
+       <article class = "privacy">
+        <h2><%= message %></h2>
+        </article>
+
+    <!--footer-->
+    <%- include('partials/footer') %>
+
+    </div> <!--grid layout end-->
+
+</body>
+</html>

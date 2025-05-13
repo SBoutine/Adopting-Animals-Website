@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Have a pet to give away</title>
+    <link rel = "stylesheet" href = "petShop.css"/>  
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!--Grid layout--> 
+    <div class = "grid-container">
+
+        <!--Header-->
+        <%- include('partials/header') %>
+
+
+        <!--Side menu bar-->
+        <%- include('partials/navbar') %>
+
+       <!--Content area-->
+       <article>
+        <h2>Have a pet to give away</h2>
+
+        <% if (typeof query !== 'undefined' && query.success === '1') { %>
+            <p class="success">Thank you! Your pet has been registered.</p>
+          <% } %>
+
+             <!--Create a form-->
+             <form id="giveAwayForm" action="/giveAway" method="POST" onsubmit="return validateForm()">
+                <fieldset class ="fieldset1">
+                    <legend class="legend1">Fill the following information</legend>
+                    <!--Radio button : cat or dog-->
+                    <p class = "p1">
+                        <label>What do you want to give away for adoption:</label>
+                        <input type = "radio" id = "cat" name = "type" value = "cat">
+                        <label for = "cat">Cat</label>
+                        <input type = "radio" id = "dog" name = "type" value = "dog">
+                        <label for = "dog">Dog</label>
+                        <span id="animalError" class="error-message"></span>
+
+                    </p>
+                
+                    <!--Drop-down list for breed-->
+                    <p class = "p1">
+                        <label for = "breed">Breed of dog or cat that you have: </label>
+                        <select id = "breed" name = "breed">
+                            <option>Bengal</option>
+                            <option>Maine Coon</option>
+                            <option>Siamese</option>
+                            <option>Persian</option>
+                            <option>Sphynx</option>
+                            <option>Labrador Retriever</option>
+                            <option>German Shepherd </option>
+                            <option>Golden Retriever</option>
+                            <option>French Bulldog</option>
+                            <option>Husky</option>
+                            <option>Mixed breed</option>
+                        </select>
+                        <span id="breedError" class="error-message"></span>
+                    </p>
+
+                    <!--Drop-down list for age-->
+                    <p class = "p1">
+                        <label for = "age">Age of the animal:</label>
+                        <select id = "age" name = "age">
+                            <option>Less than 1 month old</option>
+                            <option>Less than 2 months old</option>
+                            <option>Between 2 and 6 months old</option>
+                            <option>Between 6 months and 1 year old</option>
+                            <option>1 year old</option>
+                            <option>2 years old</option>
+                            <option>3 years old</option>
+                            <option>4 years old</option>
+                            <option>5 years old</option>
+                            <option>More than 5 years old</option>
+                        </select>
+                        <span id="ageError" class="error-message"></span>
+
+                    </p>
+
+                    <!--Radio button: Animal gender -->
+                    <p class = "p1">
+                        <label>Animal gender:</label>
+                        <input type = "radio" id = "female" name = "gender" value = "female">
+                        <label for = "female">Female</label>
+                        <input type = "radio" id = "male" name = "gender" value = "male">
+                        <label for = "male">Male</label>
+                        <span id="genderError" class="error-message"></span>
+                    </p>
+
+                    <!--Check box for the needs-->
+                    <p class = "p1">
+                        <label>Gets along with:</label><br>
+                        <input type ="checkbox" id = "othercats" name = "othercats" value = "othercats">
+                        <label for = "otherCat">Other dogs</label>
+                        <input type ="checkbox" id = "otherdogs" name = "otherdogs" value = "otherdogs">
+                        <label for = "otherDog">Other cats</label>
+                        <input type ="checkbox" id = "children" name = "smallchildren" value = "smallchildren">
+                        <label for = "children">Other small children</label>
+                        <span id="getsAlongError" class="error-message"></span>
+                    </p>
+
+                    <!--Comment area-->
+                    <p class = "p1">
+                        <label for = comment>Give us more details about your pet: </label><br>
+                        <textarea id = "comment" name = "description"></textarea>
+                        <span id="commentError" class="error-message"></span>
+                    </p>
+
+                    <!--Owner's name-->
+                    <p class = "p1"> 
+                        <label for = "name">Owner's full name: </label>
+                        <input type = "text" id = "name" name = "ownerName" placeholder = "Enter your full name">
+                        <span id="nameError" class="error-message"></span>
+                    </p>
+
+
+                    <!--Owner's email-->
+                    <p class = "p1">
+                        <label for = "email">Please provide an email address where we can contact you:</label>
+                        <input type = "email" id = "email" name = "ownerEmail">
+                        <span id="emailError" class="error-message"></span>
+                    </p>
+
+                    <!--Submit and clear button-->
+                    <input type = "submit" value = "Submit">
+                    <input type = "reset" value = "Clear">
+                
+                </fieldset>
+            </form>
+       </article>
+
+
+    <!--footer-->
+    <%- include('partials/footer') %>
+
+
+</div><!--grid layout end-->
+
+    <!-- JavaScript for form validation -->
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById('animalError').textContent = '';
+            document.getElementById('breedError').textContent = '';
+            document.getElementById('ageError').textContent = '';
+            document.getElementById('genderError').textContent = '';
+            document.getElementById('getsAlongError').textContent = '';
+            document.getElementById('commentError').textContent = '';
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+
+            // Validate animal selection
+            const animalSelected = document.querySelector('input[name="type"]:checked');
+            if (!animalSelected) {
+                document.getElementById('animalError').textContent = 'Please select an animal (cat or dog).';
+                isValid = false;
+            }
+
+            // Validate breed selection
+            const breedSelected = document.getElementById('breed').value;
+            if (!breedSelected) {
+                document.getElementById('breedError').textContent = 'Please select a breed.';
+                isValid = false;
+            }
+
+            // Validate age selection
+            const ageSelected = document.getElementById('age').value;
+            if (!ageSelected) {
+                document.getElementById('ageError').textContent = 'Please select an age.';
+                isValid = false;
+            }
+
+            // Validate gender selection
+            const genderSelected = document.querySelector('input[name="gender"]:checked');
+            if (!genderSelected) {
+                document.getElementById('genderError').textContent = 'Please select a gender.';
+                isValid = false;
+            }
+
+            // Validate "gets along with" selection
+            const getsAlongSelected = document.querySelector('input[name="othercats"]:checked') ||
+                                    document.querySelector('input[name="otherdogs"]:checked') ||
+                                    document.querySelector('input[name="smallchildren"]:checked');
+            if (!getsAlongSelected) {
+                document.getElementById('getsAlongError').textContent = 'Please select at least one option for "Gets along with".';
+                isValid = false;
+            }
+
+            // Validate comment
+            const comment = document.getElementById('comment').value.trim();
+            if (!comment) {
+                document.getElementById('commentError').textContent = 'Please provide details about your pet.';
+                isValid = false;
+            }
+
+            // Validate owner's name
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('nameError').textContent = 'Please enter your full name.';
+                isValid = false;
+            }
+
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            //To ensure the respect a valid email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Please enter your email address.';
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+
+            // If validation fails
+            if (!isValid) {
+                return false;
+            }
+
+            // If validation passes, allow form submission
+            alert("Form submitted successfully!"); 
+            return true;
+        }
+    </script>
+
+</body>
+</html>

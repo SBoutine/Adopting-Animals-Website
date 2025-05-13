@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/petShop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!--Grid layout--> 
+    <div class = "grid-container">
+
+    <!--Header-->
+    <%- include('partials/header') %>
+
+    <!--Side menu bar-->
+    <%- include('partials/navbar') %>
+
+    <article>
+        <div class = "register">
+            <form action="/register" method="POST">
+                <h2>Create an Account</h2>
+                <h5>Username can contain letters and digits only.</h5>
+                <h5>Password must be at least 4 characters long, contain at least one letter and one digit.</h5>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" pattern="[A-Za-z0-9]+" required>
+                    <br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" 
+                           pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}" required> <br><br>
+                           <div id="success-message"></div>
+                           <div id="error-message"></div>
+                    <button class = "button" type="submit">Create Account</button>
+            </form>
+        </div>
+    </article>
+
+    <!--footer-->
+    <%- include('partials/footer') %>
+
+</div><!--grid layout end-->
+</body>
+</html>

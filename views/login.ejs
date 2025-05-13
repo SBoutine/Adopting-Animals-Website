@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/petShop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!--Grid layout--> 
+    <div class = "grid-container">
+
+    <!--Header-->
+    <%- include('partials/header') %>
+
+    <!--Side menu bar-->
+    <%- include('partials/navbar') %>
+
+    <article>
+        <div class = "register">
+        <form id="login-form" method="POST" action="/login">
+            <label>Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label>Password: </label>
+            <input type="password" id="password" name="password" required>
+            <div id="error-message"></div>
+            <button class = "button" type="submit">Login</button>
+        </form>
+        </div>
+    </article>
+
+    <!--footer-->
+    <%- include('partials/footer') %>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+    
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+    
+                const data = await response.json();
+                
+                const errorElement = document.getElementById('error-message');
+                errorElement.style.display = 'none';
+                
+                if (data.success) {
+                    // Redirect to /away on success
+                    window.location.href = data.redirect;
+                } else {
+                    // Show error message
+                    errorElement.textContent = data.message;
+                    errorElement.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+
+</div><!--grid layout end-->
+</body>
+</html>
