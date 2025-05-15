@@ -1,6 +1,5 @@
-# Adopting-Animals-Website
-## Your Pet Shop Family 
-#### Description:
+# Adopting Animals Website - Your Pet Shop Family 
+## Overview:
 # Pet Adoption Website – Project Description
 
 The **Pet Adoption Website** is a full-stack web application designed to connect individuals who are looking to adopt pets with those who need to give them away. Built using **Node.js**, **Express**, and **EJS** as the templating engine, the project offers a simple, intuitive interface for browsing, searching, and submitting pet listings. It also features a basic user authentication system, allowing only registered users to submit adoption listings, thereby ensuring a more secure and moderated environment.
@@ -91,8 +90,6 @@ Instead of a traditional database, the project uses **flat file storage**:
 - `users.txt`: stores credentials in `username:password` format  
 - `pets.txt`: stores listings in a colon-separated format, e.g. `petID:username:type:breed:...`
 
-This approach is **not scalable** but keeps the project simple and focused on web fundamentals.
-
 ---
 
 ## Challenges
@@ -117,11 +114,35 @@ This project improved my understanding of:
 ## Future Improvements
 
 - Use a database like MongoDB or SQLite for data persistence  
-- Hash passwords for better security  
 - Allow users to **edit or delete** their own pet listings  
 - Add **profile pages** for users  
 - Improve UI/UX and add client-side validation  
 - Support **image uploads** for pets  
+
+---
+
+## How to run locally
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/yourusername/pet-adoption-website.git
+   cd pet-adoption-website
+   
+2. **Install dependencies**
+   ```bash
+   npm install
+
+3. **Run the server**
+   ```bash
+  node server.js
+
+4. **Open your browser**
+```arduino
+http://localhost:3000
+
+---
+## Author
+
+**Sara Boutine**
 
 ---
 
