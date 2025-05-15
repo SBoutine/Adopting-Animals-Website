@@ -124,8 +124,8 @@ This project improved my understanding of:
 ## How to run locally
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/SBoutine/pet-adoption-website.git
-   cd pet-adoption-website
+   git clone https://github.com/SBoutine/Adopting-Animals-Website.git
+   cd Adopting-Animals-Website
    
 2. **Install dependencies**
    ```bash
