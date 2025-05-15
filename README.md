@@ -133,11 +133,11 @@ This project improved my understanding of:
 
 3. **Run the server**
    ```bash
-  node server.js
+   node server.js
 
 4. **Open your browser**
-```arduino
-http://localhost:3000
+   ```bash
+   http://localhost:3000
 
 ---
 ## Author
