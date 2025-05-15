@@ -8,7 +8,7 @@ The **Pet Adoption Website** is a full-stack web application designed to connect
 
 ## Objectives
 
-The primary goal of the project was to simulate a real-world web application with user interaction, data handling, and dynamic content. I wanted to build a tool that could serve a meaningful purpose—helping people find loving homes for pets and giving users a smooth experience across different functionalities, such as:
+The primary goal of the project was to simulate a real-world web application with user interaction, data handling, and dynamic content. I wanted to build a tool that could serve a meaningful purpose, helping people find loving homes for pets and giving users a smooth experience across different functionalities, such as:
 
 - Registration and login  
 - Form submissions  
